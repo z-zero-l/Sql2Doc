@@ -500,11 +500,17 @@ def generate_word_doc(tables, output_path, default_style, head_style, content_st
 
                 # 设置单元格边框
                 if table_type == 1:  # 三线表
-                    borders = {
-                        'bottom': {'val': 'single',
-                                   'sz': outer_border if row_idx + 1 == len(table_data['fields']) else 0,
-                                   'color': hex_border_color},
-                    }
+                    if row_idx + 1 == len(table_data['fields']):
+                        borders = {
+                            'bottom': {'val': 'single', 'sz': outer_border, 'color': hex_border_color},
+                        }
+                    else:
+                        borders = {
+                            'top': {'val': 'none', 'sz': 0, 'color': hex_border_color},
+                            'bottom': {'val': 'none', 'sz': 0, 'color': hex_border_color},
+                            'start': {'val': 'none', 'sz': 0, 'color': hex_border_color},
+                            'end': {'val': 'none', 'sz': 0, 'color': hex_border_color}
+                        }
                 else:  # 全线表
                     borders = {
                         'top': {'val': 'single', 'sz': inner_border, 'color': hex_border_color},
